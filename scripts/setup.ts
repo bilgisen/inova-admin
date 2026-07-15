@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { createClient } from '@libsql/client';
 import { resolve } from 'path';
 import bcrypt from 'bcryptjs';
@@ -132,10 +133,11 @@ INSERT OR IGNORE INTO tags (name, slug) VALUES
 `;
 
 async function setup() {
-  const dbPath = resolve(process.cwd(), 'data.db');
-  console.log(`Setting up database at: ${dbPath}`);
+  const url = process.env.TURSO_DB_URL || `file:${resolve(process.cwd(), 'data.db')}`;
+  const authToken = process.env.TURSO_AUTH_TOKEN;
+  console.log(`Setting up database at: ${url}`);
 
-  const db = createClient({ url: `file:${dbPath}` });
+  const db = createClient({ url, authToken });
 
   const statements = SCHEMA.split(';').filter(s => s.trim());
   for (const stmt of statements) {
