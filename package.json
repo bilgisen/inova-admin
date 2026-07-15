@@ -1,10 +1,11 @@
 {
   "name": "inova-admin",
   "private": true,
+  "workspaces": ["vite"],
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node -e \"require('fs').copyFileSync('dist/_redirects', 'vite/dist/_redirects')\"",
+    "build": "astro build && node -e \"fs.writeFileSync('vite/dist/_redirects', '/api/*  /.netlify/functions/ssr 200\\n/*  /index.html  200')\"",
     "preview": "astro preview",
     "db:setup": "tsx scripts/setup.ts seed",
     "db:hash": "tsx scripts/setup.ts hash"

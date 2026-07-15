@@ -1,7 +1,3 @@
 [build]
-  command = "cd vite && npm run build && cd .. && npm run build && node -e \"require('fs').copyFileSync('dist/_redirects', 'vite/dist/_redirects')\""
+  command = "cd vite && npm run build && cd .. && npm run build && node -e \"fs.writeFileSync('vite/dist/_redirects', '/api/*  /.netlify/functions/ssr 200\\\\n/*  /index.html  200')\""
   publish = "vite/dist"
-
-[functions]
-  included_files = ["src/db/schema.ts"]
-  directory = ".netlify/functions-internal"
