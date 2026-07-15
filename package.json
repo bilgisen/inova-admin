@@ -1,0 +1,27 @@
+{
+  "name": "inova-admin",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node -e \"require('fs').copyFileSync('dist/_redirects', 'vite/dist/_redirects')\"",
+    "preview": "astro preview",
+    "db:setup": "tsx scripts/setup.ts seed",
+    "db:hash": "tsx scripts/setup.ts hash"
+  },
+  "dependencies": {
+    "@astrojs/netlify": "^6.2.0",
+    "@libsql/client": "^0.14.0",
+    "astro": "^5.5.0",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.6.0",
+    "jsonwebtoken": "^9.0.2",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.7",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

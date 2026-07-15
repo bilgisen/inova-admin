@@ -1,0 +1,127 @@
+{
+  "app": {
+    "name": "Inova Yönetim"
+  },
+  "nav": {
+    "dashboard": "Panel",
+    "projects": "Projeler",
+    "media": "Medya Kütüphanesi",
+    "categories": "Kategoriler",
+    "tags": "Etiketler",
+    "posts": "Yazılar",
+    "pages": "Sayfalar",
+    "settings": "Ayarlar",
+    "logout": "Çıkış"
+  },
+  "common": {
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "create": "Oluştur",
+    "search": "Ara",
+    "filter": "Filtrele",
+    "loading": "Yükleniyor...",
+    "noData": "Veri bulunamadı",
+    "confirm": "Emin misiniz?",
+    "confirmDelete": "Bu öğeyi silmek istediğinize emin misiniz?",
+    "success": "İşlem başarılı",
+    "error": "Bir hata oluştu",
+    "status": "Durum",
+    "actions": "İşlemler",
+    "yes": "Evet",
+    "no": "Hayır",
+    "all": "Tümü",
+    "back": "Geri"
+  },
+  "auth": {
+    "login": "Giriş",
+    "username": "Kullanıcı Adı",
+    "password": "Şifre",
+    "loginButton": "Giriş Yap",
+    "invalidCredentials": "Geçersiz kullanıcı adı veya şifre",
+    "welcomeBack": "Hoş geldiniz"
+  },
+  "dashboard": {
+    "title": "Panel",
+    "totalProjects": "Toplam Proje",
+    "totalMedia": "Toplam Medya",
+    "totalPosts": "Toplam Yazı",
+    "totalPages": "Toplam Sayfa",
+    "recentProjects": "Son Projeler",
+    "categoryBreakdown": "Kategori Dağılımı",
+    "quickActions": "Hızlı İşlemler",
+    "newProject": "Yeni Proje",
+    "uploadMedia": "Medya Yükle"
+  },
+  "projects": {
+    "title": "Projeler",
+    "newProject": "Yeni Proje",
+    "editProject": "Projeyi Düzenle",
+    "projectTitle": "Proje Başlığı",
+    "slug": "Slug",
+    "description": "Açıklama",
+    "client": "Müşteri",
+    "fairName": "Fuar Adı",
+    "fairDate": "Fuar Tarihi",
+    "location": "Lokasyon",
+    "category": "Kategori",
+    "status": "Durum",
+    "draft": "Taslak",
+    "published": "Yayında",
+    "featured": "Öne Çıkan",
+    "sortOrder": "Sıralama",
+    "coverImage": "Kapak Görseli",
+    "images": "Görseller",
+    "addImage": "Görsel Ekle",
+    "metaTitle": "Meta Başlık",
+    "metaDescription": "Meta Açıklama",
+    "ogImage": "OG Görseli"
+  },
+  "media": {
+    "title": "Medya Kütüphanesi",
+    "upload": "Yükle",
+    "dropFiles": "Dosyaları buraya bırakın veya tıklayarak seçin",
+    "batchUpload": "Toplu Yükleme",
+    "altText": "Alternatif Metin",
+    "caption": "Altyazı",
+    "setAsCover": "Kapak Yap",
+    "cover": "Kapak"
+  },
+  "categories": {
+    "title": "Kategoriler",
+    "newCategory": "Yeni Kategori",
+    "name": "Ad",
+    "type": "Tip",
+    "projectType": "Proje",
+    "postType": "Yazı",
+    "pageType": "Sayfa"
+  },
+  "tags": {
+    "title": "Etiketler",
+    "newTag": "Yeni Etiket",
+    "name": "Ad"
+  },
+  "posts": {
+    "title": "Yazılar",
+    "newPost": "Yeni Yazı",
+    "editPost": "Yazıyı Düzenle",
+    "content": "İçerik",
+    "excerpt": "Özet"
+  },
+  "pages": {
+    "title": "Sayfalar",
+    "newPage": "Yeni Sayfa",
+    "editPage": "Sayfayı Düzenle",
+    "content": "İçerik"
+  },
+  "theme": {
+    "light": "Açık",
+    "dark": "Koyu",
+    "system": "Sistem"
+  },
+  "lang": {
+    "en": "English",
+    "tr": "Türkçe"
+  }
+}

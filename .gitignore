@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+.env.local
+*.log
+.netlify/
+.astro/
+data.db
+*.db
+vite/node_modules/
+vite/dist/
