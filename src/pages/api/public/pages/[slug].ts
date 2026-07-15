@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { getDb } from '../../../../lib/db';
 
 export const GET: APIRoute = async ({ params }) => {
-  const db = getDb();
+  const db = await getDb();
   const result = await db.execute(
     "SELECT id, title, slug, content, meta_title, meta_description, updated_at FROM pages WHERE slug = ? AND deleted_at IS NULL AND status = 'published'",
     [params.slug]

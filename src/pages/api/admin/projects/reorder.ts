@@ -17,7 +17,7 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    const db = getDb();
+    const db = await getDb();
     const { items } = parsed.data;
 
     const stmt = 'UPDATE projects SET sort_order = ?, updated_at = ? WHERE id = ?';

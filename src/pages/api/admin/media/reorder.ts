@@ -17,7 +17,7 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    const db = getDb();
+    const db = await getDb();
     const { items } = parsed.data;
 
     await db.batch(

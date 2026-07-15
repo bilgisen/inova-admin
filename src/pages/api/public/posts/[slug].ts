@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { getDb } from '../../../../lib/db';
 
 export const GET: APIRoute = async ({ params }) => {
-  const db = getDb();
+  const db = await getDb();
   const result = await db.execute(
     `SELECT p.*, c.name as category_name, c.slug as category_slug
      FROM posts p LEFT JOIN categories c ON p.category_id = c.id

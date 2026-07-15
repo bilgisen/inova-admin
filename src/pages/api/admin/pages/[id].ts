@@ -3,7 +3,7 @@ import { getDb } from '../../../../lib/db';
 import { pageUpdateSchema } from '../../../../lib/validation';
 
 export const GET: APIRoute = async ({ params }) => {
-  const db = getDb();
+  const db = await getDb();
   const id = Number(params.id);
   const result = await db.execute('SELECT * FROM pages WHERE id = ? AND deleted_at IS NULL', [id]);
   if (!result.rows.length) {
@@ -18,7 +18,7 @@ export const GET: APIRoute = async ({ params }) => {
 
 export const PUT: APIRoute = async ({ params, request }) => {
   try {
-    const db = getDb();
+    const db = await getDb();
     const id = Number(params.id);
     const body = await request.json();
     const parsed = pageUpdateSchema.safeParse(body);
@@ -73,7 +73,7 @@ export const PUT: APIRoute = async ({ params, request }) => {
 };
 
 export const DELETE: APIRoute = async ({ params }) => {
-  const db = getDb();
+  const db = await getDb();
   const id = Number(params.id);
   const existing = await db.execute('SELECT id FROM pages WHERE id = ? AND deleted_at IS NULL', [id]);
   if (!existing.rows.length) {

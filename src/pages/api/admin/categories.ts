@@ -3,7 +3,7 @@ import { getDb } from '../../../lib/db';
 import { categorySchema } from '../../../lib/validation';
 
 export const GET: APIRoute = async ({ request }) => {
-  const db = getDb();
+  const db = await getDb();
   const url = new URL(request.url);
   const type = url.searchParams.get('type');
   let sql = 'SELECT * FROM categories';
@@ -37,7 +37,7 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    const db = getDb();
+    const db = await getDb();
     const data = parsed.data;
 
     const result = await db.execute(

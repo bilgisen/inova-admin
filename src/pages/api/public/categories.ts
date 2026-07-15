@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { getDb } from '../../../lib/db';
 
 export const GET: APIRoute = async () => {
-  const db = getDb();
+  const db = await getDb();
 
   const result = await db.execute(
     `SELECT c.id, c.name, c.slug, c.description,

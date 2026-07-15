@@ -4,7 +4,7 @@ import { categoryUpdateSchema } from '../../../../lib/validation';
 
 export const PUT: APIRoute = async ({ params, request }) => {
   try {
-    const db = getDb();
+    const db = await getDb();
     const id = Number(params.id);
     const body = await request.json();
     const parsed = categoryUpdateSchema.safeParse(body);
@@ -64,7 +64,7 @@ export const PUT: APIRoute = async ({ params, request }) => {
 };
 
 export const DELETE: APIRoute = async ({ params }) => {
-  const db = getDb();
+  const db = await getDb();
   const id = Number(params.id);
 
   const existing = await db.execute('SELECT id FROM categories WHERE id = ?', [id]);

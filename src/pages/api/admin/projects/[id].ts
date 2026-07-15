@@ -3,7 +3,7 @@ import { getDb } from '../../../../lib/db';
 import { projectUpdateSchema } from '../../../../lib/validation';
 
 export const GET: APIRoute = async ({ params }) => {
-  const db = getDb();
+  const db = await getDb();
   const id = Number(params.id);
 
   const result = await db.execute(
@@ -45,7 +45,7 @@ export const GET: APIRoute = async ({ params }) => {
 
 export const PUT: APIRoute = async ({ params, request }) => {
   try {
-    const db = getDb();
+    const db = await getDb();
     const id = Number(params.id);
     const body = await request.json();
     const parsed = projectUpdateSchema.safeParse(body);
@@ -129,7 +129,7 @@ export const PUT: APIRoute = async ({ params, request }) => {
 };
 
 export const DELETE: APIRoute = async ({ params }) => {
-  const db = getDb();
+  const db = await getDb();
   const id = Number(params.id);
 
   const existing = await db.execute(

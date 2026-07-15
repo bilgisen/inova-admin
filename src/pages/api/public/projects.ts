@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { getDb } from '../../../lib/db';
 
 export const GET: APIRoute = async ({ request }) => {
-  const db = getDb();
+  const db = await getDb();
   const url = new URL(request.url);
   const lang = url.searchParams.get('lang') || 'en';
   const page = Math.max(1, Number(url.searchParams.get('page')) || 1);

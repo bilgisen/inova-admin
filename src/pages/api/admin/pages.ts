@@ -3,7 +3,7 @@ import { getDb } from '../../../lib/db';
 import { pageSchema } from '../../../lib/validation';
 
 export const GET: APIRoute = async ({ request }) => {
-  const db = getDb();
+  const db = await getDb();
   const url = new URL(request.url);
   const page = Math.max(1, Number(url.searchParams.get('page')) || 1);
   const limit = Math.min(100, Math.max(1, Number(url.searchParams.get('limit')) || 20));
@@ -38,7 +38,7 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    const db = getDb();
+    const db = await getDb();
     const data = parsed.data;
     const result = await db.execute(
       `INSERT INTO pages (title, slug, content, status, meta_title, meta_description, og_image, published_at)

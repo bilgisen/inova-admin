@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { getDb } from '../../../lib/db';
 
 export const GET: APIRoute = async ({ request }) => {
-  const db = getDb();
+  const db = await getDb();
   const url = new URL(request.url);
   const page = Math.max(1, Number(url.searchParams.get('page')) || 1);
   const limit = Math.min(50, Math.max(1, Number(url.searchParams.get('limit')) || 10));

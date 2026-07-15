@@ -1,15 +1,20 @@
-import { createClient } from '@libsql/client';
 import { resolve } from 'path';
 
-let client: ReturnType<typeof createClient> | null = null;
+let client: any = null;
 
-export function getDb() {
+export async function getDb() {
   if (!client) {
-    const url = process.env.TURSO_DB_URL || `file:${resolve(process.cwd(), 'data.db')}`;
-    client = createClient({
-      url,
-      authToken: process.env.TURSO_AUTH_TOKEN,
-    });
+    const rawUrl = process.env.TURSO_DB_URL;
+    if (rawUrl) {
+      const { createClient } = await import('@libsql/client/http');
+      client = createClient({
+        url: rawUrl.replace(/^libsql:/, 'https:'),
+        authToken: process.env.TURSO_AUTH_TOKEN,
+      });
+    } else {
+      const { createClient } = await import('@libsql/client');
+      client = createClient({ url: `file:${resolve(process.cwd(), 'data.db')}` });
+    }
   }
   return client;
 }

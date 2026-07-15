@@ -3,7 +3,7 @@ import { getDb } from '../../../lib/db';
 import { tagSchema } from '../../../lib/validation';
 
 export const GET: APIRoute = async () => {
-  const db = getDb();
+  const db = await getDb();
   const result = await db.execute(
     'SELECT t.*, COUNT(pt.project_id) as project_count FROM tags t LEFT JOIN project_tags pt ON t.id = pt.tag_id GROUP BY t.id ORDER BY t.name ASC'
   );
@@ -28,7 +28,7 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    const db = getDb();
+    const db = await getDb();
     const data = parsed.data;
 
     const result = await db.execute(

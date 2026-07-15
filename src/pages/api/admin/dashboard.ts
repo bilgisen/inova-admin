@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { getDb } from '../../../lib/db';
 
 export const GET: APIRoute = async () => {
-  const db = getDb();
+  const db = await getDb();
 
   const [projectsResult, mediaResult, postsResult, pagesResult, recentResult, categoryResult] =
     await Promise.all([

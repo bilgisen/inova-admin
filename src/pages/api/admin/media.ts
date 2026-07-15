@@ -4,7 +4,7 @@ import { mediaSchema } from '../../../lib/validation';
 import { generateSignature, getUploadParams } from '../../../lib/cloudinary';
 
 export const GET: APIRoute = async ({ request }) => {
-  const db = getDb();
+  const db = await getDb();
   const url = new URL(request.url);
   const page = Math.max(1, Number(url.searchParams.get('page')) || 1);
   const limit = Math.min(100, Math.max(1, Number(url.searchParams.get('limit')) || 50));
@@ -52,7 +52,7 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    const db = getDb();
+    const db = await getDb();
     const data = parsed.data;
 
     if (data.is_cover) {
