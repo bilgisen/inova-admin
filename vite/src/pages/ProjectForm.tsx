@@ -93,12 +93,21 @@ export function ProjectForm() {
     return obj[lang] || obj['en'] || ''
   }
 
+  const parseJsonFields = (obj: typeof form) => {
+    const fields = ['title', 'description', 'client', 'fair_name', 'location', 'meta_title', 'meta_description'] as const
+    const parsed: Record<string, unknown> = { ...obj }
+    for (const key of fields) {
+      try { parsed[key] = JSON.parse(obj[key]) } catch { parsed[key] = {} }
+    }
+    return parsed
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setSaving(true)
     try {
       const data = {
-        ...form,
+        ...parseJsonFields(form),
         category_id: form.category_id ? Number(form.category_id) : null,
         is_featured: Number(form.is_featured),
         sort_order: 0,
