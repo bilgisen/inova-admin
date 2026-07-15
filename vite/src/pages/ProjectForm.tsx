@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Badge } from '../components/ui/badge'
 import { useToast } from '../components/layout/Toast'
 import { slugify } from '../lib/slug'
-import { ArrowLeft, Star, X } from 'lucide-react'
+import { ArrowLeft, Star, X, Upload } from 'lucide-react'
 
 interface Category {
   id: number
@@ -32,6 +32,7 @@ export function ProjectForm() {
   const { toast } = useToast()
   const navigate = useNavigate()
   const [saving, setSaving] = useState(false)
+  const [uploading, setUploading] = useState(false)
   const [categories, setCategories] = useState<Category[]>([])
   const [media, setMedia] = useState<MediaItem[]>([])
   const [form, setForm] = useState({
@@ -117,11 +118,12 @@ export function ProjectForm() {
       if (isEdit && id) {
         await api.projects.update(Number(id), data)
         toast(t('common.success'), 'success')
+        navigate('/projects')
       } else {
-        await api.projects.create(data)
+        const created = await api.projects.create(data)
         toast(t('common.success'), 'success')
+        navigate(`/projects/${(created as Record<string, unknown>).id}`)
       }
-      navigate('/projects')
     } catch {
       toast(t('common.error'), 'error')
     } finally {
@@ -144,6 +146,45 @@ export function ProjectForm() {
       setMedia((prev) => prev.filter((m) => m.id !== mediaId))
     } catch {
       toast(t('common.error'), 'error')
+    }
+  }
+
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+    if (!files?.length) return
+    setUploading(true)
+    try {
+      const sig = await api.media.signature()
+      for (const file of files) {
+        const formData = new FormData()
+        formData.append('file', file)
+        formData.append('api_key', sig.api_key)
+        formData.append('timestamp', String(sig.timestamp))
+        formData.append('signature', sig.signature)
+        formData.append('folder', sig.folder)
+        const uploadRes = await fetch(`https://api.cloudinary.com/v1_1/${sig.cloud_name}/auto/upload`, { method: 'POST', body: formData })
+        const uploadData = await uploadRes.json()
+        if (uploadData.public_id) {
+          const created = await api.media.create({
+            filename: uploadData.public_id,
+            original_name: file.name,
+            mime_type: file.type,
+            url: uploadData.secure_url,
+            cloudinary_pid: uploadData.public_id,
+            width: uploadData.width,
+            height: uploadData.height,
+            file_size: uploadData.bytes,
+            project_id: Number(id),
+          })
+          setMedia((prev) => [...prev, created as MediaItem])
+        }
+      }
+      toast(t('common.success'), 'success')
+    } catch {
+      toast(t('common.error'), 'error')
+    } finally {
+      setUploading(false)
+      e.target.value = ''
     }
   }
 
@@ -242,7 +283,14 @@ export function ProjectForm() {
             <CardHeader>
               <CardTitle className="text-lg">{t('projects.images')}</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-4">
+              <div>
+                <Button type="button" variant="outline" disabled={uploading} onClick={() => document.getElementById('project-media-upload')?.click()}>
+                  <Upload className="w-4 h-4 mr-1" />
+                  {uploading ? t('common.loading') : t('media.upload')}
+                </Button>
+                <input id="project-media-upload" type="file" multiple accept="image/*" className="hidden" onChange={handleUpload} />
+              </div>
               {media.length === 0 ? (
                 <p className="text-sm text-muted-foreground">{t('common.noData')}</p>
               ) : (
