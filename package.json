@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node -e \"fs.writeFileSync('vite/dist/_redirects', '/api/*  /.netlify/functions/ssr 200\\n/*  /index.html  200')\"",
+    "build": "astro build && node -e \"fs.cpSync('vite/dist', 'dist', {recursive: true, filter: (s) => !s.includes('_redirects')}); fs.writeFileSync('dist/_redirects', '/api/*  /.netlify/functions/ssr  200\\n/*  /index.html  200')\"",
     "preview": "astro preview",
     "db:setup": "tsx scripts/setup.ts seed",
     "db:hash": "tsx scripts/setup.ts hash"
