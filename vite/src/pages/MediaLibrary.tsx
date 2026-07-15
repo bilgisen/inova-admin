@@ -40,7 +40,10 @@ export function MediaLibrary() {
       setMedia(res.data as MediaItem[])
       setTotal(res.total)
       setLoading(false)
-    }).catch(() => setLoading(false))
+    }).catch((e) => {
+      console.error('Media list error:', e)
+      setLoading(false)
+    })
   }, [page])
 
   useEffect(() => { fetchMedia() }, [fetchMedia])

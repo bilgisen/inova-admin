@@ -8,6 +8,7 @@ import { Select } from '../components/ui/select'
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Badge } from '../components/ui/badge'
 import { useToast } from '../components/layout/Toast'
+import { slugify } from '../lib/slug'
 import { ArrowLeft, Star, X } from 'lucide-react'
 
 interface Category {
@@ -164,15 +165,18 @@ export function ProjectForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="text-sm font-medium">{t('projects.projectTitle')} ({lang})</label>
-                <Input
-                  value={getValue(form.title)}
-                  onChange={(e) => setForm({ ...form, title: setJsonField(form.title, e.target.value) })}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium">{t('projects.slug')}</label>
-                <Input value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} required />
+                  <Input
+                    value={getValue(form.title)}
+                    onChange={(e) => {
+                      const newTitle = setJsonField(form.title, e.target.value)
+                      setForm({
+                        ...form,
+                        title: newTitle,
+                        slug: isEdit ? form.slug : slugify(getValue(newTitle)),
+                      })
+                    }}
+                    required
+                  />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium">{t('projects.description')} ({lang})</label>
