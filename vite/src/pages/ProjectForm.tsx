@@ -162,6 +162,7 @@ export function ProjectForm() {
         formData.append('timestamp', String(sig.timestamp))
         formData.append('signature', sig.signature)
         formData.append('folder', sig.folder)
+        formData.append('upload_preset', sig.upload_preset)
         const uploadRes = await fetch(`https://api.cloudinary.com/v1_1/${sig.cloud_name}/auto/upload`, { method: 'POST', body: formData })
         const uploadData = await uploadRes.json()
         if (uploadData.public_id) {

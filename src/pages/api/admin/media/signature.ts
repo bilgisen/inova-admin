@@ -16,6 +16,7 @@ export const GET: APIRoute = async () => {
     timestamp,
     signature,
     folder: 'inova-admin',
+    upload_preset: 'inova_admin_unsigned',
   }), {
     status: 200,
     headers: { 'Content-Type': 'application/json' },
