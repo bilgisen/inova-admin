@@ -7,5 +7,7 @@ dist/
 .astro/
 data.db
 *.db
+auth
+auth-wal
 vite/node_modules/
 vite/dist/
