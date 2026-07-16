@@ -7,10 +7,10 @@ import { Input } from '../components/ui/input'
 import { Textarea } from '../components/ui/textarea'
 import { Select } from '../components/ui/select'
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
-import { Badge } from '../components/ui/badge'
 import { useToast } from '../components/layout/Toast'
 import { slugify } from '../lib/slug'
-import { ArrowLeft, Star, X, Upload } from 'lucide-react'
+import { ArrowLeft, Star, X, Upload, Images } from 'lucide-react'
+import { MediaSelectModal } from '../components/media/MediaSelectModal'
 
 interface Category {
   id: number
@@ -37,6 +37,7 @@ export function ProjectForm() {
   const [categories, setCategories] = useState<Category[]>([])
   const [media, setMedia] = useState<MediaItem[]>([])
   const [dragIndex, setDragIndex] = useState<number | null>(null)
+  const [mediaSelectOpen, setMediaSelectOpen] = useState(false)
   const [form, setForm] = useState({
     title: `{"${lang}":""}`,
     slug: '',
@@ -222,6 +223,20 @@ export function ProjectForm() {
     }
   }
 
+  const handleSelectMedia = async (mediaIds: number[]) => {
+    if (!id) return
+    try {
+      for (const mediaId of mediaIds) {
+        await api.media.update(mediaId, { project_id: Number(id) })
+      }
+      toast(t('common.success'), 'success')
+      const p = await api.projects.get(Number(id))
+      setMedia((p.media as MediaItem[]) || [])
+    } catch {
+      toast(t('common.error'), 'error')
+    }
+  }
+
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
@@ -318,10 +333,14 @@ export function ProjectForm() {
               <CardTitle className="text-lg">{t('projects.images')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div>
+              <div className="flex gap-2">
                 <Button type="button" variant="outline" disabled={uploading} onClick={() => document.getElementById('project-media-upload')?.click()}>
                   <Upload className="w-4 h-4 mr-1" />
                   {uploading ? t('common.loading') : t('media.upload')}
+                </Button>
+                <Button type="button" variant="outline" onClick={() => setMediaSelectOpen(true)}>
+                  <Images className="w-4 h-4 mr-1" />
+                  {t('media.selectFromLibrary')}
                 </Button>
                 <input id="project-media-upload" type="file" multiple accept="image/*" className="hidden" onChange={handleUpload} />
               </div>
@@ -345,26 +364,29 @@ export function ProjectForm() {
                         alt=""
                         className="w-full aspect-square object-cover rounded-md"
                       />
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-md flex items-center justify-center gap-1">
-                        <button
-                          type="button"
-                          onClick={() => handleSetCover(item.id)}
-                          className={`p-1 rounded ${item.is_cover ? 'text-yellow-400' : 'text-white'} hover:bg-white/20 cursor-pointer`}
-                          title={t('media.setAsCover')}
-                        >
-                          <Star className="w-4 h-4" fill={item.is_cover ? 'currentColor' : 'none'} />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveMedia(item.id)}
-                          className="p-1 rounded text-red-400 hover:bg-white/20 cursor-pointer"
-                        >
-                          <X className="w-4 h-4" />
-                        </button>
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-md">
+                        <div className="absolute top-1 left-1">
+                          <button
+                            type="button"
+                            onClick={() => handleSetCover(item.id)}
+                            className={`px-2 py-1 rounded text-xs flex items-center gap-1 cursor-pointer ${
+                              item.is_cover ? 'bg-yellow-500 text-white' : 'bg-black/60 text-white hover:bg-black/80'
+                            }`}
+                          >
+                            <Star className="w-3 h-3" fill={item.is_cover ? 'currentColor' : 'none'} />
+                            {item.is_cover ? t('media.cover') : t('media.setAsCover')}
+                          </button>
+                        </div>
+                        <div className="absolute top-1 right-1">
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveMedia(item.id)}
+                            className="p-1 rounded bg-black/60 text-red-400 hover:bg-red-700/80 cursor-pointer"
+                          >
+                            <X className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
                       </div>
-                      {item.is_cover ? (
-                        <Badge className="absolute top-1 left-1 text-[10px] px-1 py-0">{t('media.cover')}</Badge>
-                      ) : null}
                     </div>
                   ))}
                 </div>
@@ -382,6 +404,15 @@ export function ProjectForm() {
           </Button>
         </div>
       </form>
+
+      {isEdit && id && (
+        <MediaSelectModal
+          open={mediaSelectOpen}
+          onClose={() => setMediaSelectOpen(false)}
+          onSelect={handleSelectMedia}
+          projectId={Number(id)}
+        />
+      )}
     </div>
   )
 }

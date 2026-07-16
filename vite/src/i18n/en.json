@@ -54,16 +54,16 @@
     "newProject": "New Project",
     "uploadMedia": "Upload Media",
     "howToTitle": "How to Use",
-    "howToStep1": "Upload media files first",
-    "howToStep1Desc": "Upload your images to Cloudinary from the Media Library page. Supported formats: JPG, PNG, WebP.",
-    "howToStep2": "Create categories",
-    "howToStep2Desc": "Create categories to organize your projects, posts, and pages. You can define different categories for each content type.",
-    "howToStep3": "Add your projects",
-    "howToStep3Desc": "Create new projects with title, description, client info and more. Set a cover image and add gallery images.",
-    "howToStep4": "Manage posts and pages",
-    "howToStep4Desc": "Create blog posts and static pages. Organize your content by categories and publish them.",
-    "howToStep5": "Featured and ordering",
-    "howToStep5Desc": "Feature projects to display them on the homepage. Drag-and-drop to change ordering."
+    "howToStep1": "Create projects",
+    "howToStep1Desc": "Enter project title, description and details on the new project page. Organize your projects with categories.",
+    "howToStep2": "Manage images",
+    "howToStep2Desc": "Upload images directly to a project or select from the media library. Drag-and-drop to reorder.",
+    "howToStep3": "Organize categories",
+    "howToStep3Desc": "Categorize your projects, posts and pages so visitors can easily find content.",
+    "howToStep4": "Publish content",
+    "howToStep4Desc": "Save projects as draft and publish later, or publish them directly.",
+    "howToStep5": "Feature and reorder",
+    "howToStep5Desc": "Feature projects to display them on the homepage. Change ordering to set priority."
   },
   "projects": {
     "title": "Projects",
@@ -97,7 +97,11 @@
     "altText": "Alt Text",
     "caption": "Caption",
     "setAsCover": "Set as Cover",
-    "cover": "Cover"
+    "cover": "Cover",
+    "selectFromLibrary": "Select from Library",
+    "select": "Select",
+    "selectedCount": " media selected",
+    "searchMedia": "Search media..."
   },
   "categories": {
     "title": "Categories",

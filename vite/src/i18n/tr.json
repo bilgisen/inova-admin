@@ -54,16 +54,16 @@
     "newProject": "Yeni Proje",
     "uploadMedia": "Medya Yükle",
     "howToTitle": "Nasıl Kullanılır?",
-    "howToStep1": "İlk olarak medya dosyalarınızı yükleyin",
-    "howToStep1Desc": "Medya Kütüphanesi sayfasından görsellerinizi Cloudinary'e yükleyin. Desteklenen formatlar: JPG, PNG, WebP.",
-    "howToStep2": "Kategorileri oluşturun",
-    "howToStep2Desc": "Proje, yazı ve sayfalarınızı düzenlemek için kategoriler oluşturun. Her içerik türü için farklı kategoriler tanımlayabilirsiniz.",
-    "howToStep3": "Projelerinizi ekleyin",
-    "howToStep3Desc": "Proje başlığı, açıklama, müşteri bilgisi gibi detayları girerek yeni projeler oluşturun. Kapak görseli belirleyebilir ve görseller ekleyebilirsiniz.",
-    "howToStep4": "Yazı ve sayfaları yönetin",
-    "howToStep4Desc": "Blog yazıları ve statik sayfalar oluşturun. İçeriklerinizi kategorilere göre düzenleyin ve yayınlayın.",
-    "howToStep5": "Öne çıkarma ve sıralama",
-    "howToStep5Desc": "Projelerinizi öne çıkararak ana sayfada görünmesini sağlayın. Sürükle-bırak ile sıralamayı değiştirebilirsiniz."
+    "howToStep1": "Proje oluşturun",
+    "howToStep1Desc": "Yeni proje sayfasından proje başlığı, açıklama ve detayları girin. Projelerinizi kategorilere ayırarak düzenleyin.",
+    "howToStep2": "Görselleri yönetin",
+    "howToStep2Desc": "Projenize özel görsel yükleyebilir veya medya kütüphanesinden seçim yapabilirsiniz. Sürükle-bırak ile sıralamayı değiştirin.",
+    "howToStep3": "Kategorileri düzenleyin",
+    "howToStep3Desc": "Proje, yazı ve sayfalarınızı kategorilere ayırarak ziyaretçilerin içerikleri kolayca bulmasını sağlayın.",
+    "howToStep4": "İçerikleri yayınlayın",
+    "howToStep4Desc": "Projelerinizi taslak olarak kaydedip sonra yayına alabilir veya doğrudan yayınlayabilirsiniz.",
+    "howToStep5": "Öne çıkarın ve sıralayın",
+    "howToStep5Desc": "Projelerinizi öne çıkararak ana sayfada görünmelerini sağlayın. Sıralamayı değiştirerek öncelik belirleyin."
   },
   "projects": {
     "title": "Projeler",
@@ -97,7 +97,11 @@
     "altText": "Alternatif Metin",
     "caption": "Altyazı",
     "setAsCover": "Kapak Yap",
-    "cover": "Kapak"
+    "cover": "Kapak",
+    "selectFromLibrary": "Kütüphaneden Seç",
+    "select": "Seç",
+    "selectedCount": " medya seçildi",
+    "searchMedia": "Medyada ara..."
   },
   "categories": {
     "title": "Kategoriler",

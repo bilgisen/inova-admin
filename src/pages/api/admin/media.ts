@@ -10,12 +10,17 @@ export const GET: APIRoute = async ({ request }) => {
   const limit = Math.min(100, Math.max(1, Number(url.searchParams.get('limit')) || 50));
   const offset = (page - 1) * limit;
   const projectId = url.searchParams.get('project_id');
+  const search = url.searchParams.get('search');
 
   let where = '';
   const params: unknown[] = [];
   if (projectId) {
     where = 'WHERE project_id = ?';
     params.push(Number(projectId));
+  }
+  if (search) {
+    where = where ? `${where} AND original_name LIKE ?` : 'WHERE original_name LIKE ?';
+    params.push(`%${search}%`);
   }
 
   const [countResult, rowsResult] = await Promise.all([
