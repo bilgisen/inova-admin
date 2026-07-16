@@ -4,6 +4,7 @@ import { api } from '../lib/api'
 import { useI18n } from '../providers/I18nProvider'
 import { Button } from '../components/ui/button'
 import { Input } from '../components/ui/input'
+import { Textarea } from '../components/ui/textarea'
 import { Select } from '../components/ui/select'
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Badge } from '../components/ui/badge'
@@ -35,6 +36,7 @@ export function ProjectForm() {
   const [uploading, setUploading] = useState(false)
   const [categories, setCategories] = useState<Category[]>([])
   const [media, setMedia] = useState<MediaItem[]>([])
+  const [dragIndex, setDragIndex] = useState<number | null>(null)
   const [form, setForm] = useState({
     title: `{"${lang}":""}`,
     slug: '',
@@ -149,6 +151,38 @@ export function ProjectForm() {
     }
   }
 
+  const handleDragStart = (index: number) => setDragIndex(index)
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault()
+    e.currentTarget.classList.add('ring-2', 'ring-primary')
+  }
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.currentTarget.classList.remove('ring-2', 'ring-primary')
+  }
+
+  const handleDrop = async (e: React.DragEvent, dropIndex: number) => {
+    e.preventDefault()
+    e.currentTarget.classList.remove('ring-2', 'ring-primary')
+    if (dragIndex === null || dragIndex === dropIndex) return
+
+    const updated = [...media]
+    const [moved] = updated.splice(dragIndex, 1)
+    updated.splice(dropIndex, 0, moved)
+    const reordered = updated.map((m, i) => ({ ...m, sort_order: i }))
+    setMedia(reordered)
+    setDragIndex(null)
+
+    try {
+      await api.media.reorder(reordered.map((m) => ({ id: m.id, sort_order: m.sort_order })))
+    } catch {
+      toast(t('common.error'), 'error')
+    }
+  }
+
+  const handleDragEnd = () => setDragIndex(null)
+
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
     if (!files?.length) return
@@ -221,7 +255,7 @@ export function ProjectForm() {
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium">{t('projects.description')} ({lang})</label>
-                <Input
+                <Textarea
                   value={getValue(form.description)}
                   onChange={(e) => setForm({ ...form, description: setJsonField(form.description, e.target.value) })}
                 />
@@ -295,8 +329,17 @@ export function ProjectForm() {
                 <p className="text-sm text-muted-foreground">{t('common.noData')}</p>
               ) : (
                 <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                  {media.map((item) => (
-                    <div key={item.id} className="relative group">
+                  {media.map((item, index) => (
+                    <div
+                      key={item.id}
+                      className={`relative group cursor-grab ${dragIndex === index ? 'opacity-50' : ''}`}
+                      draggable
+                      onDragStart={() => handleDragStart(index)}
+                      onDragOver={handleDragOver}
+                      onDragLeave={handleDragLeave}
+                      onDrop={(e) => handleDrop(e, index)}
+                      onDragEnd={handleDragEnd}
+                    >
                       <img
                         src={item.url}
                         alt=""
