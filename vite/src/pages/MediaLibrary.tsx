@@ -110,8 +110,8 @@ export function MediaLibrary() {
     if (!editItem) return
     try {
       await api.media.update(editItem.id, {
-        alt_text: JSON.stringify({ ...JSON.parse(editItem.alt_text || '{}'), [lang]: editAlt }),
-        caption: JSON.stringify({ ...JSON.parse(editItem.caption || '{}'), [lang]: editCaption }),
+        alt_text: { ...JSON.parse(editItem.alt_text || '{}'), [lang]: editAlt },
+        caption: { ...JSON.parse(editItem.caption || '{}'), [lang]: editCaption },
       })
       toast(t('common.success'), 'success')
       setEditItem(null)
