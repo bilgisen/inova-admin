@@ -95,7 +95,7 @@ export const api = {
     reorder: (items: { id: number; sort_order: number }[]) =>
       request<{ success: boolean }>('/admin/media/reorder', { method: 'POST', body: JSON.stringify({ items }) }),
     signature: () =>
-      request<{ cloud_name: string; api_key: string; timestamp: number; signature: string; folder: string; upload_preset: string }>('/admin/media/signature'),
+      request<{ cloud_name: string; api_key: string; timestamp: number; signature: string; folder: string }>('/admin/media/signature'),
   },
 
   posts: {
