@@ -52,7 +52,18 @@
     "categoryBreakdown": "Category Breakdown",
     "quickActions": "Quick Actions",
     "newProject": "New Project",
-    "uploadMedia": "Upload Media"
+    "uploadMedia": "Upload Media",
+    "howToTitle": "How to Use",
+    "howToStep1": "Upload media files first",
+    "howToStep1Desc": "Upload your images to Cloudinary from the Media Library page. Supported formats: JPG, PNG, WebP.",
+    "howToStep2": "Create categories",
+    "howToStep2Desc": "Create categories to organize your projects, posts, and pages. You can define different categories for each content type.",
+    "howToStep3": "Add your projects",
+    "howToStep3Desc": "Create new projects with title, description, client info and more. Set a cover image and add gallery images.",
+    "howToStep4": "Manage posts and pages",
+    "howToStep4Desc": "Create blog posts and static pages. Organize your content by categories and publish them.",
+    "howToStep5": "Featured and ordering",
+    "howToStep5Desc": "Feature projects to display them on the homepage. Drag-and-drop to change ordering."
   },
   "projects": {
     "title": "Projects",

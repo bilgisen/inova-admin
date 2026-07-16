@@ -52,7 +52,18 @@
     "categoryBreakdown": "Kategori Dağılımı",
     "quickActions": "Hızlı İşlemler",
     "newProject": "Yeni Proje",
-    "uploadMedia": "Medya Yükle"
+    "uploadMedia": "Medya Yükle",
+    "howToTitle": "Nasıl Kullanılır?",
+    "howToStep1": "İlk olarak medya dosyalarınızı yükleyin",
+    "howToStep1Desc": "Medya Kütüphanesi sayfasından görsellerinizi Cloudinary'e yükleyin. Desteklenen formatlar: JPG, PNG, WebP.",
+    "howToStep2": "Kategorileri oluşturun",
+    "howToStep2Desc": "Proje, yazı ve sayfalarınızı düzenlemek için kategoriler oluşturun. Her içerik türü için farklı kategoriler tanımlayabilirsiniz.",
+    "howToStep3": "Projelerinizi ekleyin",
+    "howToStep3Desc": "Proje başlığı, açıklama, müşteri bilgisi gibi detayları girerek yeni projeler oluşturun. Kapak görseli belirleyebilir ve görseller ekleyebilirsiniz.",
+    "howToStep4": "Yazı ve sayfaları yönetin",
+    "howToStep4Desc": "Blog yazıları ve statik sayfalar oluşturun. İçeriklerinizi kategorilere göre düzenleyin ve yayınlayın.",
+    "howToStep5": "Öne çıkarma ve sıralama",
+    "howToStep5Desc": "Projelerinizi öne çıkararak ana sayfada görünmesini sağlayın. Sürükle-bırak ile sıralamayı değiştirebilirsiniz."
   },
   "projects": {
     "title": "Projeler",

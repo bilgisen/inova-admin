@@ -5,7 +5,7 @@ import { useI18n } from '../providers/I18nProvider'
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button'
 import { Badge } from '../components/ui/badge'
-import { FolderKanban, Images, FileText, File, Plus, Upload } from 'lucide-react'
+import { FolderKanban, Images, FileText, File, Plus, Upload, CheckCircle2 } from 'lucide-react'
 
 interface DashboardData {
   stats: { projects: number; media: number; posts: number; pages: number }
@@ -117,6 +117,30 @@ export function Dashboard() {
               <Upload className="w-4 h-4 mr-1" />
               {t('dashboard.uploadMedia')}
             </Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg flex items-center gap-2">
+            <CheckCircle2 className="w-5 h-5 text-green-500" />
+            {t('dashboard.howToTitle')}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {[1, 2, 3, 4, 5].map((step) => (
+              <div key={step} className="flex gap-3">
+                <div className="flex-shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary text-sm font-bold flex items-center justify-center">
+                  {step}
+                </div>
+                <div>
+                  <p className="text-sm font-medium">{t(`dashboard.howToStep${step}`)}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{t(`dashboard.howToStep${step}Desc`)}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </CardContent>
       </Card>
